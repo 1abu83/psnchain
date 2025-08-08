@@ -1,0 +1,28 @@
+[Unit]
+Description=PSNChain Node
+After=network.target
+
+[Service]
+Type=simple
+User=psnchain
+Group=psnchain
+WorkingDirectory=/home/psnchain/psnchain
+ExecStart=/usr/bin/node /home/psnchain/psnchain/src/index.js
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/home/psnchain/psnchain/logs
+
+# Logging
+SyslogIdentifier=psnchain
+SyslogLevel=info
+
+[Install]
+WantedBy=multi-user.target

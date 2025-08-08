@@ -1,0 +1,35 @@
+{
+  "name": "psnchain",
+  "version": "1.0.0",
+  "description": "PSNChain - A public Proof of Stake blockchain with token creation and swapping capabilities",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node src/index.js",
+    "cli": "node src/cli/index.js",
+    "test": "jest"
+  },
+  "keywords": [
+    "blockchain",
+    "pos",
+    "psnchain",
+    "psn",
+    "amm",
+    "tokens"
+  ],
+  "author": "PSNChain Team",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^11.0.0",
+    "bn.js": "^5.2.1",
+    "crypto": "^1.0.1",
+    "elliptic": "^6.5.4",
+    "sha256": "^0.2.0"
+  },
+  "devDependencies": {
+    "@types/bn.js": "^5.1.1",
+    "@types/elliptic": "^6.4.14",
+    "@types/node": "^20.0.0",
+    "jest": "^29.0.0"
+  }
+}

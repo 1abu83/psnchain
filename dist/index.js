@@ -1,0 +1,28 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.signTransaction = exports.createWallet = exports.amm = exports.tokenManager = exports.blockchain = void 0;
+const blockchain_1 = require("./blockchain/blockchain");
+const token_1 = require("./blockchain/token");
+const amm_1 = require("./blockchain/amm");
+const wallet_1 = require("./utils/wallet");
+Object.defineProperty(exports, "createWallet", { enumerable: true, get: function () { return wallet_1.createWallet; } });
+Object.defineProperty(exports, "signTransaction", { enumerable: true, get: function () { return wallet_1.signTransaction; } });
+const blockchain = new blockchain_1.Blockchain();
+exports.blockchain = blockchain;
+const tokenManager = new token_1.TokenManager();
+exports.tokenManager = tokenManager;
+const amm = new amm_1.AMM();
+exports.amm = amm;
+console.log('PSNChain initialized successfully!');
+const wallet = (0, wallet_1.createWallet)();
+console.log('Test wallet created:');
+console.log(`Address: ${wallet.address}`);
+console.log(`Public Key: ${wallet.publicKey}`);
+console.log(`Private Key: ${wallet.privateKey}`);
+blockchain.minePendingTransactions(wallet.address);
+console.log(`Wallet balance: ${blockchain.getBalanceOfAddress(wallet.address)} PSN`);
+const tokenId = tokenManager.createToken('Test Token', 'TST', 1000000, 18, wallet.address);
+console.log(`Created token with ID: ${tokenId}`);
+const poolId = amm.createPool('PSN', tokenId, 1000, 2000);
+console.log(`Created liquidity pool with ID: ${poolId}`);
+//# sourceMappingURL=index.js.map
