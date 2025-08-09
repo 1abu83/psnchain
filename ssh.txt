@@ -1,0 +1,2 @@
+ssh root@147.93.81.226
+PS C:\Users\USER\Desktop\lumadexfinance\lumaspot\newdataluma\backend>
