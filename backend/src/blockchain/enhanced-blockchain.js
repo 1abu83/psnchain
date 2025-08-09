@@ -390,6 +390,28 @@ class EnhancedBlockchain extends Blockchain {
     await fs.writeFile(this.storageFile, JSON.stringify(data, null, 2));
   }
 
+  // Create genesis block with developer funds allocation
+  createGenesisBlockWithDeveloperFunds(developerAddress) {
+    const genesis = new Block(Date.now(), [], '0');
+    genesis.index = 0;
+    
+    // Developer allocation transaction (100M PSN)
+    const developerAllocation = new TokenTransaction(
+      null, // sender = null (minting from genesis)
+      developerAddress,
+      100000000, // 100M PSN
+      null, // native PSN (no token contract)
+      0, // no gas fee for genesis
+      Date.now()
+    );
+    
+    genesis.transactions = [developerAllocation];
+    genesis.hash = genesis.calculateHash();
+    
+    console.log(`🎉 Genesis block created with ${developerAllocation.amount.toLocaleString()} PSN for developer: ${developerAddress}`);
+    return genesis;
+  }
+
   // Enhanced load from storage with token data
   async loadFromStorage() {
     try {

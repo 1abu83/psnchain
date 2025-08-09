@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import api from '../../lib/api';
-import { createWalletFromPrivateKey } from '../../lib/wallet-utils';
+import { createWalletFromPrivateKey, generateNewWallet } from '../../lib/wallet-utils';
 
 // Initial state
 const initialState = {
@@ -123,21 +123,18 @@ export function WalletProvider({ children }) {
       setLoading(true);
       clearError();
 
-      const response = await api.createWallet();
-      if (response.success) {
-        const wallet = response.data;
-        dispatch({ type: ActionTypes.SET_WALLET, payload: wallet });
+      // Generate wallet on client-side so the private key never leaves the device
+      const wallet = await generateNewWallet();
 
-        // Save to localStorage
-        localStorage.setItem('psnchain_wallet', JSON.stringify(wallet));
+      dispatch({ type: ActionTypes.SET_WALLET, payload: wallet });
 
-        // Load wallet data
-        await loadWalletData(wallet.address);
+      // Save to localStorage
+      localStorage.setItem('psnchain_wallet', JSON.stringify(wallet));
 
-        return wallet;
-      } else {
-        throw new Error(response.error || 'Failed to create wallet');
-      }
+      // Load wallet data
+      await loadWalletData(wallet.address);
+
+      return wallet;
     } catch (error) {
       setError(error.message);
       throw error;

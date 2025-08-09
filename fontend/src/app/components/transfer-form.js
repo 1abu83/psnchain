@@ -17,8 +17,8 @@ const TransferForm = () => {
   // Get balances array safely
   const balances = balance?.balances || [];
   
-  // Find PSN balance for gas fee checking
-  const psnBalance = balances.find(token => token.denom === process.env.NEXT_PUBLIC_FEE_DENOM)?.amount || '0';
+  // Find PSAN balance for gas fee checking
+  const psnBalance = balances.find(token => token.denom === 'psan')?.amount || '0';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +26,7 @@ const TransferForm = () => {
     console.log('Transfer form submitted');
     console.log('Wallet:', wallet);
     console.log('Balance:', balance);
-    console.log('PSN Balance:', psnBalance);
+    console.log('PSAN Balance:', psnBalance);
     
     if (!wallet) {
       setMessage('Please connect your wallet first');
@@ -62,9 +62,9 @@ const TransferForm = () => {
       return;
     }
     
-    // For PSN transactions, also check if enough left for gas (simplified check)
-    if (selectedToken === 'psn' && availableAmount < (amountNum + 0.001)) {
-      setMessage(`Insufficient PSN. You need extra PSN for transaction fees.`);
+    // For PSAN transactions, also check if enough left for gas (simplified check)
+    if (selectedToken === 'psan' && availableAmount < (amountNum + 0.001)) {
+      setMessage(`Insufficient PSAN. You need extra PSAN for transaction fees.`);
       setMessageType('error');
       return;
     }
@@ -202,7 +202,7 @@ const TransferForm = () => {
             <Zap className="w-4 h-4 text-blue-500" />
             <span className="text-sm font-medium text-foreground">Network Fee:</span>
             <span className="text-sm text-blue-500 font-semibold">
-              {parseInt(process.env.NEXT_PUBLIC_FEE_AMOUNT || '5000') / 1000000} PSN
+              {parseInt(process.env.NEXT_PUBLIC_FEE_AMOUNT || '5000') / 1000000} PSAN
             </span>
           </div>
           <p className="text-xs text-muted-foreground mt-1">

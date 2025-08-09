@@ -1,0 +1,15 @@
+{
+  "chain": [
+    {
+      "index": 0,
+      "timestamp": 1754774111447,
+      "transactions": [],
+      "previousHash": "0",
+      "nonce": 0,
+      "hash": "36551d15afe072afd48c01fdb8a8fdc37c49e4e2f501cb457c0af7145c8dfcc1"
+    }
+  ],
+  "pendingTransactions": [],
+  "difficulty": 2,
+  "miningReward": 100
+}

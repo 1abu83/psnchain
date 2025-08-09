@@ -13,7 +13,8 @@ const Navigation = () => {
     { name: 'Balances', path: '/balances', icon: Wallet },
     { name: 'Transfer', path: '/transfer', icon: Send },
     { name: 'Swap', path: '/swap', icon: ArrowLeftRight },
-    { name: 'History', path: '/history', icon: History }
+    { name: 'History', path: '/history', icon: History },
+    { name: 'Wallet', path: '/wallet', icon: Wallet }
   ];
 
   return (

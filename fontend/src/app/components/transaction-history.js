@@ -155,7 +155,7 @@ const TransactionHistory = () => {
                     
                     <div className="text-sm text-muted-foreground mt-1">
                       <div className="font-medium text-foreground">
-                        {tx.amount} PSN
+                        {tx.amount} PSAN
                       </div>
                       <div>
                         {tx.sender === wallet?.address
@@ -184,7 +184,7 @@ const TransactionHistory = () => {
                     className="inline-flex items-center space-x-1 text-xs text-blue-500 hover:text-blue-600 transition-colors"
                     whileHover={{ scale: 1.05 }}
                   >
-                    <span>PSNScan</span>
+                    <span>PSANScan</span>
                     <ExternalLink className="w-3 h-3" />
                   </motion.a>
                 </div>

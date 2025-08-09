@@ -19,8 +19,8 @@ const SwapForm = () => {
   // Get balances array safely
   const balances = balance?.balances || [];
 
-  // Find PSN balance for gas fee checking
-  const psnBalance = balances.find(token => token.denom === process.env.NEXT_PUBLIC_FEE_DENOM)?.amount || '0';
+  // Find PSAN balance for gas fee checking
+  const psnBalance = balances.find(token => token.denom === 'psan')?.amount || '0';
 
   // Get available tokens for selection
   const availableTokens = balances.map(token => token.denom);
@@ -39,7 +39,7 @@ const SwapForm = () => {
       
       // In a real implementation, this would call the swap API
       // For now, we'll simulate with a fixed rate
-      const rate = fromToken === 'psn' ? 0.95 : 1.05;
+      const rate = fromToken === 'psan' ? 0.95 : 1.05;
       const output = (parseFloat(amount) * rate).toFixed(6);
       setEstimatedOutput(output);
     } catch (error) {
@@ -97,12 +97,12 @@ const SwapForm = () => {
       return;
     }
     
-    // Check if user has enough PSN for gas
+    // Check if user has enough PSAN for gas
     const psnAmount = parseInt(psnBalance) / 1000000;
     const requiredGas = parseInt(process.env.NEXT_PUBLIC_FEE_AMOUNT || '5000') / 1000000;
     
     if (psnAmount < requiredGas) {
-      setMessage(`Insufficient PSN for gas fee. You need at least ${requiredGas} PSN for gas.`);
+      setMessage(`Insufficient PSAN for gas fee. You need at least ${requiredGas} PSAN for gas.`);
       setMessageType('error');
       return;
     }
@@ -262,7 +262,7 @@ const SwapForm = () => {
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Network Fee</span>
-                <span className="text-foreground">{parseInt(process.env.NEXT_PUBLIC_FEE_AMOUNT || '5000') / 1000000} PSN</span>
+                <span className="text-foreground">{parseInt(process.env.NEXT_PUBLIC_FEE_AMOUNT || '5000') / 1000000} PSAN</span>
               </div>
             </div>
           </motion.div>

@@ -27,7 +27,7 @@ const MiningPanel = () => {
     try {
       const result = await mineBlock();
       setMiningResult(result);
-      setMessage(`Successfully mined block #${result.block.index}! Reward: ${result.reward} PSN`);
+      setMessage(`Successfully mined block #${result.block.index}! Reward: ${result.reward} PSAN`);
       setMessageType('success');
     } catch (error) {
       console.error('Mining error:', error);
@@ -55,7 +55,7 @@ const MiningPanel = () => {
         </div>
         <div>
           <h2 className="text-lg font-bold text-foreground">Mining Panel</h2>
-          <p className="text-sm text-muted-foreground">Mine blocks and earn PSN rewards</p>
+          <p className="text-sm text-muted-foreground">Mine blocks and earn PSAN rewards</p>
         </div>
       </div>
 
@@ -82,7 +82,7 @@ const MiningPanel = () => {
             <Zap className="w-4 h-4 text-green-500" />
             <span className="text-sm font-medium text-foreground">Mining Reward</span>
           </div>
-          <div className="text-2xl font-bold text-foreground">100 PSN</div>
+          <div className="text-2xl font-bold text-foreground">100 PSAN</div>
         </motion.div>
       </div>
 
@@ -168,7 +168,7 @@ const MiningPanel = () => {
                 <div>Block Hash: {miningResult.block.hash.substring(0, 20)}...</div>
                 <div>Transactions: {miningResult.block.transactions.length}</div>
                 <div>Nonce: {miningResult.block.nonce}</div>
-                <div>Reward: {miningResult.reward} PSN</div>
+               <div>Reward: {miningResult.reward} PSAN</div>
               </div>
             </div>
           </div>
@@ -208,7 +208,7 @@ const MiningPanel = () => {
         <h3 className="text-sm font-semibold text-foreground mb-2">Mining Tips:</h3>
         <ul className="text-xs text-muted-foreground space-y-1">
           <li>• Mining processes pending transactions into blocks</li>
-          <li>• You earn 100 PSN reward for each block mined</li>
+          <li>• You earn 100 PSAN reward for each block mined</li>
           <li>• Mining requires at least 1 pending transaction</li>
           <li>• Higher difficulty means longer mining time</li>
         </ul>

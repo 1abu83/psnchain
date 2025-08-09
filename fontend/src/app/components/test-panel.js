@@ -31,13 +31,13 @@ const TestPanel = () => {
       // Test 2: Check initial balance
       const initialBalance = balance?.balances?.find(b => b.denom === 'psn');
       const initialAmount = initialBalance ? parseInt(initialBalance.amount) / 1000000 : 0;
-      addResult('Initial Balance', true, `Balance: ${initialAmount} PSN`);
+      addResult('Initial Balance', true, `Balance: ${initialAmount} PSAN`);
 
-      // Test 3: Mine a block to get some PSN
+      // Test 3: Mine a block to get some PSAN
       if (initialAmount === 0) {
-        addResult('Mining Block', false, 'Mining block to get PSN...');
+        addResult('Mining Block', false, 'Mining block to get PSAN...');
         await mineBlock();
-        addResult('Mining Block', true, 'Block mined successfully, earned 100 PSN');
+        addResult('Mining Block', true, 'Block mined successfully, earned 100 PSAN');
       }
 
       // Test 4: Create second wallet for testing
@@ -49,7 +49,7 @@ const TestPanel = () => {
       addResult('Test Wallet', true, `Created test wallet: ${testWallet.address.substring(0, 12)}...`);
 
       // Test 5: Send transaction
-      addResult('Send Transaction', false, 'Sending 10 PSN to test wallet...');
+      addResult('Send Transaction', false, 'Sending 10 PSAN to test wallet...');
       const txData = {
         sender: wallet.address,
         recipient: testWallet.address,
@@ -117,8 +117,8 @@ const TestPanel = () => {
           <div className="text-sm text-muted-foreground">Balance</div>
           <div className="text-sm font-medium text-foreground">
             {balance?.balances?.find(b => b.denom === 'psn') 
-              ? `${(parseInt(balance.balances.find(b => b.denom === 'psn').amount) / 1000000).toFixed(2)} PSN`
-              : '0 PSN'
+              ? `${(parseInt(balance.balances.find(b => b.denom === 'psan')?.amount || '0') / 1000000).toFixed(2)} PSAN`
+              : '0 PSAN'
             }
           </div>
         </div>

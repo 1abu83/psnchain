@@ -65,14 +65,14 @@ const BalanceDisplay = () => {
   // Get balances array safely
   const balances = balance?.balances || [];
   
-  // Find PSN balance specifically
-  const psnBalance = balances.find(token => token.denom === process.env.NEXT_PUBLIC_FEE_DENOM) || { denom: 'psn', amount: '0' };
+  // Find PSAN coin balance specifically (default to 0)
+  const psnBalance = { denom: 'psan', amount: '0' };
   
-  // Get other tokens (excluding PSN)
-  const otherTokens = balances.filter(token => token.denom !== process.env.NEXT_PUBLIC_FEE_DENOM);
+  // Get other tokens (exclude native PSN/PSAN display)
+  const otherTokens = balances.filter(token => token.denom !== 'psn' && token.denom !== 'psan' && token.denom !== process.env.NEXT_PUBLIC_FEE_DENOM);
 
-  // Calculate total value (mock calculation for demo)
-  const totalValue = (parseInt(psnBalance.amount) / 1000000) * 1.5; // Mock PSN price
+  // No portfolio valuation
+  const totalValue = 0;
 
   return (
     <motion.div 
@@ -151,28 +151,10 @@ const BalanceDisplay = () => {
         </div>
       </motion.div>
 
-      {/* Total Value */}
-      <motion.div 
-        className="bg-gradient-to-r from-blue-500/10 to-purple-600/10 p-4 rounded-xl mb-6 border border-blue-500/20"
-        whileHover={{ scale: 1.02 }}
-        transition={{ type: "spring", stiffness: 300 }}
-      >
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-sm text-muted-foreground mb-1">Total Portfolio Value</p>
-            <p className="text-2xl font-bold text-foreground">
-              {showBalances ? `$${totalValue.toFixed(2)}` : '••••••'}
-            </p>
-          </div>
-          <div className="flex items-center space-x-1 text-green-500">
-            <TrendingUp className="w-4 h-4" />
-            <span className="text-sm font-medium">+2.4%</span>
-          </div>
-        </div>
-      </motion.div>
+      {/* No Total Value section (removed dummy) */}
       
       <div className="space-y-3">
-        {/* PSN Token Balance */}
+        {/* PSAN Coin Balance */}
         <motion.div 
           className="bg-gradient-to-r from-blue-500/5 to-purple-600/5 p-4 rounded-xl border border-blue-500/10"
           whileHover={{ scale: 1.02, backgroundColor: "rgba(59, 130, 246, 0.1)" }}
@@ -182,22 +164,20 @@ const BalanceDisplay = () => {
             <div className="flex items-center space-x-3">
               <div className="relative">
                 <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl w-12 h-12 flex items-center justify-center shadow-lg p-2">
-                  <Image src="/psn.png" alt="PSN" width={32} height={32} className="rounded-lg"/>
+                  <Image src="/psn.png" alt="PSAN" width={32} height={32} className="rounded-lg"/>
                 </div>
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full border-2 border-white"></div>
               </div>
               <div>
-                <div className="font-semibold text-foreground">PSN Token</div>
-                <div className="text-sm text-muted-foreground">Native Token</div>
+                <div className="font-semibold text-foreground">PSAN Coin</div>
+                <div className="text-sm text-muted-foreground">Native Coin</div>
               </div>
             </div>
             <div className="text-right">
               <div className="font-bold text-foreground text-lg">
                 {showBalances ? (parseInt(psnBalance.amount) / 1000000).toFixed(2) : '••••'}
               </div>
-              <div className="text-sm text-muted-foreground">
-                {showBalances ? `$${((parseInt(psnBalance.amount) / 1000000) * 1.5).toFixed(2)}` : '••••'}
-              </div>
+              {/* No fiat valuation */}
             </div>
           </div>
         </motion.div>
@@ -230,9 +210,7 @@ const BalanceDisplay = () => {
                       <div className="font-semibold text-foreground">
                         {showBalances ? (parseInt(token.amount) / 1000000).toFixed(2) : '••••'}
                       </div>
-                      <div className="text-xs text-muted-foreground">
-                        {showBalances ? '$0.00' : '••••'}
-                      </div>
+                      {/* No fiat valuation for tokens */}
                     </div>
                   </div>
                 </motion.div>
