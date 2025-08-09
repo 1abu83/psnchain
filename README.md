@@ -1,177 +1,307 @@
-# PSNChain
+# PSNChain - Complete Blockchain Solution
 
-PSNChain is a public Proof of Stake blockchain with token creation and swapping capabilities.
+Modern, production-ready blockchain with decentralized exchange (DEX), token creation, and elegant web interface.
 
-## Features
+## 🌟 Features
 
-- Wallet creation and management
-- PSN token transfers
-- Fungible token creation and management
-- AMM-based token swapping
-- CLI tools for all operations
-- Ready for mainnet deployment
-- React frontend for wallet and token operations
+### 🔗 Blockchain Core
+- **Proof-of-Work Consensus**: SHA256 mining algorithm
+- **Native Cryptocurrency**: PSN token with mining rewards
+- **Smart Contracts**: Token creation and management
+- **Transaction Pool**: Pending transaction management
+- **Chain Validation**: Cryptographic integrity verification
 
-## Prerequisites
+### 💱 Decentralized Exchange (DEX)
+- **Automated Market Maker**: Uniswap-like constant product formula
+- **Liquidity Pools**: Token pair trading
+- **Swap Functionality**: Instant token exchanges
+- **Fee System**: 0.3% trading fees for liquidity providers
+- **Slippage Protection**: Minimum output amount validation
 
-- Node.js 18.x or higher
-- npm 8.x or higher
+### 🎨 Modern Web Interface
+- **Glassmorphism Design**: Translucent UI with backdrop blur
+- **Responsive Layout**: Mobile-first design approach
+- **Dark/Light Theme**: Automatic theme switching
+- **Real-time Updates**: WebSocket integration
+- **Smooth Animations**: Framer Motion micro-interactions
 
-## Installation
+### 🔐 Security Features
+- **ECDSA Signatures**: secp256k1 cryptographic security
+- **Rate Limiting**: API protection against abuse
+- **CORS Protection**: Cross-origin request security
+- **SSL/TLS Encryption**: HTTPS with Let's Encrypt
+- **Firewall Configuration**: UFW and fail2ban protection
 
-1. Clone the repository:
-   ```
-   git clone https://github.com/your-username/psnchain.git
+## 🏗️ Architecture
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Frontend      │    │   Backend API   │    │   Blockchain    │
+│   (Next.js)     │◄──►│   (Express.js)  │◄──►│   Core          │
+│   Port: 3000    │    │   Port: 3001    │    │   (Node.js)     │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         └───────────────────────┼───────────────────────┘
+                                 │
+                    ┌─────────────────┐
+                    │   Nginx Proxy   │
+                    │   Port: 80/443  │
+                    └─────────────────┘
+```
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+ 
+- Docker & Docker Compose
+- Git
+
+### Local Development
+
+1. **Clone Repository**
+   ```bash
+   git clone <repository-url>
    cd psnchain
    ```
 
-2. Install dependencies:
-   ```
+2. **Setup Backend**
+   ```bash
+   cd backend
    npm install
+   cp .env.example .env
+   npm run api
    ```
 
-## Usage
-
-### CLI Commands
-
-#### Create Wallet
-```
-node src/cli/index.js create-wallet
-```
-
-#### Get Balance
-```
-node src/cli/index.js get-balance <address>
-```
-
-#### Send Token
-```
-node src/cli/index.js send-token -a <amount> -t <recipient> -f <sender-private-key>
-```
-
-#### Create Token
-```
-node src/cli/index.js create-token -n <name> -s <symbol> -t <total-supply> -d <decimals> -f <creator-private-key>
-```
-
-#### Swap Token
-```
-node src/cli/index.js swap-token -p <pool-id> -i <token-in> -a <amount> -f <sender-private-key>
-```
-
-#### List Tokens
-```
-node src/cli/index.js list-tokens
-```
-
-## Frontend
-
-The project includes a React frontend for wallet and token operations:
-
-1. Navigate to the frontend directory:
-   ```
-   cd frontend
-   ```
-
-2. Install dependencies:
-   ```
+3. **Setup Frontend**
+   ```bash
+   cd fontend
    npm install
+   npm run dev
    ```
 
-3. Start the development server:
-   ```
-   npm start
-   ```
+4. **Access Application**
+   - Frontend: http://localhost:3000
+   - API: http://localhost:3001/api
+   - Health Check: http://localhost:3001/api/health
 
-4. Open your browser and go to http://localhost:3000
+### Docker Development
 
-## Deployment
+```bash
+# Start all services
+docker-compose up -d
 
-### Ubuntu VPS Deployment
+# View logs
+docker-compose logs -f
 
-1. Copy the deploy directory to your VPS:
-   ```
-   scp -r deploy user@your-server:/home/user/
-   ```
+# Stop services
+docker-compose down
+```
 
-2. Run the deployment script on your VPS:
-   ```
-   chmod +x deploy/ubuntu-deploy.sh
-   sudo ./deploy/ubuntu-deploy.sh
-   ```
+## 🌐 VPS Deployment
+
+### Automated Deployment
+
+```bash
+# Make deployment script executable
+chmod +x deploy-vps.sh
+
+# Deploy to VPS (replace with your domain)
+./deploy-vps.sh your-domain.com admin@your-domain.com
+```
 
 ### Manual Deployment
 
-1. Create a dedicated user:
-   ```
-   sudo useradd -m -s /bin/bash psnchain
-   ```
-
-2. Copy files to the psnchain user's home directory:
-   ```
-   sudo mkdir -p /home/psnchain/psnchain
-   sudo cp -r . /home/psnchain/psnchain/
-   sudo chown -R psnchain:psnchain /home/psnchain/psnchain
+1. **Server Setup**
+   ```bash
+   # Update system
+   sudo apt update && sudo apt upgrade -y
+   
+   # Install dependencies
+   sudo apt install -y nodejs npm nginx certbot python3-certbot-nginx
    ```
 
-3. Install dependencies:
-   ```
-   sudo -u psnchain npm install --prefix /home/psnchain/psnchain
-   ```
-
-4. Install and start the systemd service:
-   ```
-   sudo cp /home/psnchain/psnchain/deploy/psnchain.service /etc/systemd/system/
-   sudo systemctl daemon-reload
-   sudo systemctl enable psnchain
-   sudo systemctl start psnchain
+2. **SSL Certificate**
+   ```bash
+   sudo certbot --nginx -d your-domain.com
    ```
 
-## Architecture
+3. **Deploy Application**
+   ```bash
+   # Clone and setup
+   git clone <repository-url>
+   cd psnchain
+   
+   # Install dependencies
+   cd backend && npm install && cd ..
+   cd fontend && npm install && cd ..
+   
+   # Start with Docker
+   docker-compose up -d
+   ```
 
-### Core Components
+## 📡 API Endpoints
 
-1. **Blockchain**: Main blockchain implementation with proof-of-stake consensus
-2. **Token Manager**: Handles fungible token creation and management
-3. **AMM**: Automated Market Maker for token swapping
-4. **Wallet Utilities**: Cryptographic functions for wallet management
+### Wallet Management
+- `POST /api/wallet/create` - Create new wallet
+- `GET /api/balance/:address` - Get wallet balance
 
-### Data Structures
+### Transactions
+- `POST /api/transaction/send` - Send PSN tokens
+- `GET /api/transactions/:address` - Get transaction history
+- `POST /api/mine` - Mine pending transactions
 
-1. **Block**: Contains transactions and metadata
-2. **Transaction**: Represents a token transfer
-3. **Token**: Fungible token information
-4. **Liquidity Pool**: AMM liquidity pool for token swapping
+### Token Management
+- `POST /api/token/create` - Create new token
+- `GET /api/tokens` - List all tokens
 
-## Security
+### DEX/AMM
+- `POST /api/swap` - Swap tokens
+- `GET /api/pools` - List liquidity pools
 
-- All private keys are generated using secure cryptographic methods
-- Transactions are signed using ECDSA
-- All communications should be secured with TLS in production
+### Blockchain Info
+- `GET /api/blockchain/info` - Blockchain statistics
+- `GET /api/blockchain/blocks` - Get blocks
+- `GET /api/health` - Health check
 
-## Contributing
+## 🔧 Configuration
+
+### Backend Environment (.env)
+```env
+NODE_ENV=production
+API_PORT=3001
+FRONTEND_URL=https://your-domain.com
+CHAIN_ID=psnchain-1
+MINING_DIFFICULTY=2
+MINING_REWARD=100
+```
+
+### Frontend Environment (.env.local)
+```env
+NEXT_PUBLIC_API_URL=https://your-domain.com/api
+NEXT_PUBLIC_WS_URL=wss://your-domain.com
+NEXT_PUBLIC_CHAIN_ID=psnchain-1
+NEXT_PUBLIC_FEE_DENOM=psn
+NEXT_PUBLIC_FEE_AMOUNT=5000
+```
+
+## 🛠️ Development
+
+### Project Structure
+```
+psnchain/
+├── backend/                 # Blockchain & API server
+│   ├── src/
+│   │   ├── blockchain/      # Core blockchain logic
+│   │   ├── api/            # REST API server
+│   │   ├── cli/            # Command line interface
+│   │   └── utils/          # Utility functions
+│   ├── Dockerfile
+│   └── package.json
+├── fontend/                # Next.js frontend
+│   ├── src/app/
+│   │   ├── components/     # React components
+│   │   └── providers/      # Context providers
+│   ├── Dockerfile
+│   └── package.json
+├── nginx/                  # Reverse proxy config
+├── docker-compose.yml      # Container orchestration
+└── deploy-vps.sh          # Deployment script
+```
+
+### Available Scripts
+
+**Backend:**
+- `npm start` - Start blockchain core
+- `npm run api` - Start API server
+- `npm run cli` - CLI interface
+- `npm test` - Run tests
+
+**Frontend:**
+- `npm run dev` - Development server
+- `npm run build` - Production build
+- `npm start` - Production server
+
+### CLI Usage
+
+```bash
+# Create wallet
+npm run cli create-wallet
+
+# Check balance
+npm run cli get-balance <address>
+
+# Send tokens
+npm run cli send-token --amount 10 --to <address> --from <private-key>
+
+# Create token
+npm run cli create-token --name "My Token" --symbol "MTK" --total-supply 1000000 --from <address>
+
+# List tokens
+npm run cli list-tokens
+```
+
+## 📊 Monitoring
+
+### Health Monitoring
+```bash
+# Check service status
+curl http://localhost:3001/api/health
+
+# View logs
+docker-compose logs -f
+
+# System monitoring
+./monitor.sh
+```
+
+### Performance Metrics
+- **Blockchain**: Block time, transaction throughput
+- **API**: Response time, request rate
+- **System**: CPU, memory, disk usage
+
+## 🔒 Security
+
+### Implemented Security Measures
+- **Cryptographic Security**: ECDSA signatures, SHA256 hashing
+- **Network Security**: Firewall, rate limiting, CORS
+- **Transport Security**: SSL/TLS encryption
+- **Application Security**: Input validation, error handling
+- **Infrastructure Security**: Container isolation, non-root users
+
+### Security Best Practices
+- Regular security updates
+- Strong password policies
+- Network segmentation
+- Monitoring and logging
+- Backup and recovery procedures
+
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a pull request
+2. Create feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open Pull Request
 
-## License
+## 📄 License
 
-MIT
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Dari pengujian yang telah dilakukan:
+## 🆘 Support
 
-Membuat wallet baru berhasil dan menghasilkan alamat, public key, dan private key.
-Memeriksa saldo wallet menunjukkan saldo PSN dan token.
-Membuat token baru akan menambahkan token ke daftar token komunitas.
-Arsitektur Blockchain
-Blockchain PSNChain menggunakan:
+- **Documentation**: Check this README and inline comments
+- **Issues**: Create GitHub issues for bugs and feature requests
+- **Community**: Join our Discord/Telegram for discussions
 
-Proof of Stake Consensus: Sistem konsensus yang efisien dan ramah lingkungan.
-Hashing Real: Menggunakan algoritma SHA256 untuk hashing blok dan transaksi.
-Struktur Modular: Memungkinkan penambahan fitur baru di masa depan.
-AMM (Automated Market Maker): Sistem pertukaran token berbasis likuiditas pool.
-Validasi Transaksi: Menggunakan ECDSA untuk penandatanganan dan verifikasi transaksi.
-Blockchain ini siap untuk digunakan di mainnet dan mendukung semua fitur yang diminta, termasuk wallet, token creation, dan token swapping dengan biaya dalam token PSN.
+## 🎯 Roadmap
+
+- [ ] Database persistence (PostgreSQL/MongoDB)
+- [ ] Advanced smart contracts
+- [ ] Multi-signature wallets
+- [ ] Governance system
+- [ ] Mobile applications
+- [ ] Layer 2 scaling solutions
+
+---
+
+**Built with ❤️ for the decentralized future**
