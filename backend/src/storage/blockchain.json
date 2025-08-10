@@ -2,11 +2,20 @@
   "chain": [
     {
       "index": 0,
-      "timestamp": 1754774111447,
-      "transactions": [],
+      "timestamp": 1754783314357,
+      "transactions": [
+        {
+          "sender": null,
+          "recipient": "fd242e4b83661362f1ff1b764d99355773f2f41f",
+          "amount": 1000000000,
+          "timestamp": 1754783314357,
+          "signature": null,
+          "txHash": "c7c99ffb08e67767e0d3d6e0e3dcbb8673a3fc0b48fd3b528bbeb3ab6e030378"
+        }
+      ],
       "previousHash": "0",
       "nonce": 0,
-      "hash": "36551d15afe072afd48c01fdb8a8fdc37c49e4e2f501cb457c0af7145c8dfcc1"
+      "hash": "e41334134f0d9166d0a5d637269ecb5abfd851a1e39b48e1a5c5ed5a38e9c41b"
     }
   ],
   "pendingTransactions": [],

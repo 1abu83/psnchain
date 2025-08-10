@@ -2,12 +2,12 @@
 
 ## 📋 Overview
 
-This guide will help you create a developer wallet with **100,000,000 PSN Coins** using Genesis Block Allocation. This is the most legitimate and secure way to allocate initial funds in a blockchain.
+This guide will help you create a developer wallet with **1,000,000,000 PSN Coins** using Genesis Block Allocation. This is the most legitimate and secure way to allocate initial funds in a blockchain.
 
 ## 🎯 What You'll Get
 
 - ✅ **Developer Wallet**: New wallet with private/public keys
-- ✅ **100M PSN**: Initial allocation of 100,000,000 PSN coins
+- ✅ **1B PSN**: Initial allocation of 1,000,000,000 PSN coins
 - ✅ **Genesis Block**: Blockchain starts with your allocation
 - ✅ **Enhanced Features**: Gas fees, token support, AMM
 
@@ -65,7 +65,7 @@ Your developer wallet will contain:
 - **Address**: `psn...` (40+ characters)
 - **Private Key**: 64-character hex string
 - **Public Key**: Derived from private key
-- **Balance**: 100,000,000 PSN
+- **Balance**: 1,000,000,000 PSN
 - **Created**: Timestamp
 
 ## ⚠️ Security Warnings
@@ -97,7 +97,7 @@ curl http://localhost:3001/api/balance/{YOUR_ADDRESS}
   "success": true,
   "data": {
     "address": "psn...",
-    "balance": 100000000,
+    "balance": 1000000000,
     "tokens": {}
   }
 }
@@ -278,7 +278,7 @@ If you encounter issues:
 
 ## 🎉 Congratulations!
 
-You now have a developer wallet with 100M PSN coins! 
+You now have a developer wallet with 1B PSN coins! 
 
 **Remember**: 
 - 🔒 Keep your private key secure

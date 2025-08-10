@@ -395,11 +395,11 @@ class EnhancedBlockchain extends Blockchain {
     const genesis = new Block(Date.now(), [], '0');
     genesis.index = 0;
     
-    // Developer allocation transaction (100M PSN)
+    // Developer allocation transaction (1B PSN)
     const developerAllocation = new TokenTransaction(
       null, // sender = null (minting from genesis)
       developerAddress,
-      100000000, // 100M PSN
+      1000000000, // 1B PSN
       null, // native PSN (no token contract)
       0, // no gas fee for genesis
       Date.now()

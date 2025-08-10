@@ -72,7 +72,13 @@ class PSNChainAPIServer {
     // Balance routes
     this.app.get('/api/balance/:address', (req, res) => {
       try {
-        const { address } = req.params;
+        let { address } = req.params;
+        
+        // Handle PSN address prefix (psn...)
+        if (address.startsWith('psn')) {
+          address = address.substring(3);
+        }
+        
         const psnBalance = blockchain.getBalanceOfAddress(address);
         
         // Get token balances
@@ -87,7 +93,7 @@ class PSNChainAPIServer {
         const balances = [
           {
             denom: 'psn',
-            amount: (psnBalance * 1000000).toString() // Convert to base units
+            amount: psnBalance.toString() // PSN balance is already in correct units
           },
           ...tokenBalances
         ];
@@ -107,7 +113,15 @@ class PSNChainAPIServer {
     // Transaction routes
     this.app.post('/api/transaction/send', (req, res) => {
       try {
-        const { sender, recipient, amount, privateKey } = req.body;
+        let { sender, recipient, amount, privateKey } = req.body;
+        
+        // Handle PSN address prefix (psn...)
+        if (sender && sender.startsWith('psn')) {
+          sender = sender.substring(3);
+        }
+        if (recipient && recipient.startsWith('psn')) {
+          recipient = recipient.substring(3);
+        }
         
         // Validate inputs
         if (!sender || !recipient || !amount || !privateKey) {
@@ -150,13 +164,18 @@ class PSNChainAPIServer {
     // Mining routes
     this.app.post('/api/mine', (req, res) => {
       try {
-        const { minerAddress } = req.body;
+        let { minerAddress } = req.body;
         
         if (!minerAddress) {
           return res.status(400).json({ 
             success: false, 
             error: 'Missing minerAddress' 
           });
+        }
+
+        // Handle PSN address prefix (psn...)
+        if (minerAddress.startsWith('psn')) {
+          minerAddress = minerAddress.substring(3);
         }
 
         // Mine pending transactions
@@ -305,8 +324,13 @@ class PSNChainAPIServer {
     // Transaction history
     this.app.get('/api/transactions/:address', (req, res) => {
       try {
-        const { address } = req.params;
+        let { address } = req.params;
         const { limit = 50 } = req.query;
+        
+        // Handle PSN address prefix (psn...)
+        if (address.startsWith('psn')) {
+          address = address.substring(3);
+        }
         
         const transactions = [];
         

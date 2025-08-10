@@ -1,0 +1,31 @@
+# Developer Wallet Details
+=====================================
+
+## Wallet Information
+Address: fd242e4b83661362f1ff1b764d99355773f2f41f
+Balance: 1.000.000.000 PSN (1,000,000,000 PSN)
+Created: 2025-08-09T23:48:34.380Z
+
+## Private Key (KEEP SECRET!)
+63c4c418f196d6b537435397b0698bf333bfa849c0e51907a5188a1aa18ce091
+
+## Public Key
+049a0b7d4f8b8e5b49d6d082073af26fd8874321df6500f5e756b1cb17026344719638c7394f75be762c7e427c0586d51d65b0b3a08365d6119a4c953710968875
+
+## Important Notes
+- This wallet contains 1,000,000,000 PSN coins
+- Keep your private key secure and never share it
+- You can import this wallet using the private key
+- This is your developer wallet with initial coin supply
+
+## How to Use
+1. Copy the private key above
+2. Go to your frontend wallet page
+3. Click "Import Wallet"
+4. Paste the private key
+5. Your wallet will be loaded with 1B PSN
+
+## Security Warning
+⚠️  NEVER share your private key with anyone!
+⚠️  Store it securely offline
+⚠️  This gives full access to your 1B PSN coins
